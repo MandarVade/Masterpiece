@@ -7,7 +7,7 @@ import { CartProvider } from './context/CartContext';
 // Components
 import Navbar from './components/common/Navbar';
 import Footer from './components/common/Footer';
-import AuthModal from './components/common/AuthModal';
+import AuthModel from './components/common/AuthModel';
 
 // Pages
 import Home from './pages/Home';
@@ -16,7 +16,7 @@ import ProductDetail from './pages/ProductDetail';
 import Cart from './pages/Cart';
 import Checkout from './pages/Checkout';
 import Artists from './pages/Artists';
-import ArtistDetail from './pages/ArtistDetail';
+import ArtistDetails from './pages/ArtistDetails';
 import Blogs from './pages/Blogs';
 import BlogDetail from './pages/BlogDetail';
 import About from './pages/About';
@@ -29,7 +29,7 @@ function App() {
           <CartProvider>
             <div className="min-h-screen flex flex-col">
               <Navbar />
-              <AuthModal />
+              <AuthModel />
               <main className="flex-1">
                 <Routes>
                   <Route path="/" element={<Home />} />
@@ -38,7 +38,7 @@ function App() {
                   <Route path="/cart" element={<Cart />} />
                   <Route path="/checkout" element={<Checkout />} />
                   <Route path="/artists" element={<Artists />} />
-                  <Route path="/artist/:slug" element={<ArtistDetail />} />
+                  <Route path="/artist/:slug" element={<ArtistDetails />} />
                   <Route path="/blogs" element={<Blogs />} />
                   <Route path="/blog/:slug" element={<BlogDetail />} />
                   <Route path="/about" element={<About />} />
