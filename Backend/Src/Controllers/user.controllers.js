@@ -24,7 +24,7 @@ const registerUser = asyncHandler(async (req, res) => {
   const { fullname, username, email, password } = req.body;
 
   if ([fullname, username, email, password].some((field) => !field || !field.trim())) {
-    throw new APIError(400, "All fields are required.");
+    throw new APIError(400, "All fields are required."); 
   }
   const checkExist = await User.findOne({
     $or: [{ username }, { email }],
@@ -315,7 +315,7 @@ const getUserChannelProfile = asyncHandler(async (req, res) => {
     },
     {
       $project: {
-        fullName: 1,
+        fullname: 1,
         username: 1,
         subscribersCount: 1,
         channelsSubscribedToCount: 1,
