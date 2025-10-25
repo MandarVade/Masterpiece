@@ -9,6 +9,42 @@ const RelatedProducts = ({ currentProductId = null, limit = 4 }) => {
     .filter(painting => painting.id !== currentProductId)
     .slice(0, limit);
 
+  const handleAddToCart = (product) => {
+    // Get existing cart items from localStorage
+    const existingCart = JSON.parse(localStorage.getItem('cart') || '[]');
+    
+    // Check if item already exists in cart
+    const existingItem = existingCart.find(item => item.id === product.id);
+    
+    if (existingItem) {
+      // Update quantity if item exists
+      const updatedCart = existingCart.map(item => 
+        item.id === product.id 
+          ? { ...item, quantity: item.quantity + 1 }
+          : item
+      );
+      localStorage.setItem('cart', JSON.stringify(updatedCart));
+    } else {
+      // Add new item to cart
+      const newItem = {
+        id: product.id,
+        title: product.title,
+        artist: product.artist,
+        price: product.price,
+        quantity: 1,
+        size: product.dimensions,
+        image: product.image,
+        category: product.category,
+        year: product.year,
+        medium: product.medium
+      };
+      localStorage.setItem('cart', JSON.stringify([...existingCart, newItem]));
+    }
+    
+    // Show success message
+    alert(`${product.title} added to cart!`);
+  };
+
   if (relatedProducts.length === 0) {
     return null;
   }
@@ -41,11 +77,26 @@ const RelatedProducts = ({ currentProductId = null, limit = 4 }) => {
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300">
                 <div className="absolute bottom-0 left-0 right-0 p-6 transform translate-y-4 group-hover:translate-y-0 transition-transform duration-300">
                   <div className="flex gap-2">
-                    <button className="flex-1 bg-white text-gray-900 py-2 px-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center gap-2">
+                    <button 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        handleAddToCart(product);
+                      }}
+                      className="flex-1 bg-white text-gray-900 py-2 px-4 rounded-xl font-semibold hover:bg-gray-100 transition-colors flex items-center justify-center gap-2"
+                    >
                       <ShoppingCart className="w-4 h-4" />
                       Add
                     </button>
-                    <button className="bg-white/20 backdrop-blur-sm text-white p-2 rounded-xl hover:bg-white/30 transition-colors">
+                    <button 
+                      onClick={(e) => {
+                        e.preventDefault();
+                        e.stopPropagation();
+                        // Handle wishlist toggle
+                        alert(`${product.title} added to wishlist!`);
+                      }}
+                      className="bg-white/20 backdrop-blur-sm text-white p-2 rounded-xl hover:bg-white/30 transition-colors"
+                    >
                       <Heart className="w-5 h-5" />
                     </button>
                   </div>

@@ -32,8 +32,13 @@ const CartItem = ({ item, index, onUpdateQuantity, onRemove }) => {
               by {item.artist}
             </p>
             <p className="text-sm text-gray-500 dark:text-gray-500 mt-1">
-              Size: {item.size}
+              {item.size || item.dimensions}
             </p>
+            {item.category && (
+              <span className="inline-block px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs font-semibold mt-2">
+                {item.category}
+              </span>
+            )}
           </div>
 
           <div className="flex flex-col sm:flex-row sm:items-center sm:justify-between gap-4">

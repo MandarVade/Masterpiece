@@ -1,40 +1,88 @@
-import React, { useState } from 'react';
+import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 import { ArrowLeft, ShoppingBag } from 'lucide-react';
 import CartItem from '../components/cart/CartItem';
 import CartSummary from '../components/cart/CartSummary';
 import EmptyCart from '../components/cart/EmptyCart';
+import { paintings } from '../data/paintings';
+import { artists } from '../data/artists';
 
 const Cart = () => {
-  const [cartItems, setCartItems] = useState([
-    {
-      id: 1,
-      title: "Sunset Dreams",
-      artist: "Sarah Chen",
-      price: 1299,
-      quantity: 1,
-      size: "Medium (24x36\")",
-      image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=500&fit=crop"
-    },
-    {
-      id: 2,
-      title: "Urban Symphony",
-      artist: "Marcus Rodriguez",
-      price: 899,
-      quantity: 2,
-      size: "Small (16x20\")",
-      image: "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=400&h=500&fit=crop"
-    },
-    {
-      id: 3,
-      title: "Ocean Whispers",
-      artist: "Emma Thompson",
-      price: 1499,
-      quantity: 1,
-      size: "Large (36x48\")",
-      image: "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=400&h=500&fit=crop"
-    }
-  ]);
+  const [cartItems, setCartItems] = useState([]);
+  const [loading, setLoading] = useState(true);
+
+  useEffect(() => {
+    // Simulate loading cart items from localStorage or API
+    const timer = setTimeout(() => {
+      // For demo purposes, let's add some paintings to cart
+      const sampleCartItems = paintings.slice(0, 3).map((painting, index) => {
+        const artist = artists.find(a => a.id === painting.artistId);
+        return {
+          id: painting.id,
+          title: painting.title,
+          artist: painting.artist,
+          price: painting.price,
+          quantity: index === 1 ? 2 : 1, // Second item has quantity 2
+          size: painting.dimensions, // Using dimensions instead of size
+          image: painting.image,
+          category: painting.category,
+          year: painting.year,
+          medium: painting.medium
+        };
+      });
+      
+      setCartItems(sampleCartItems);
+      setLoading(false);
+    }, 500);
+
+    return () => clearTimeout(timer);
+  }, []);
+
+  if (loading) {
+    return (
+      <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30 dark:from-gray-900 dark:via-purple-900/10 dark:to-blue-900/10">
+        <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-12">
+          <div className="grid lg:grid-cols-3 gap-8">
+            {/* Loading skeleton for cart items */}
+            <div className="lg:col-span-2 space-y-4">
+              {[1, 2, 3].map((index) => (
+                <div key={index} className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg animate-pulse">
+                  <div className="flex flex-col sm:flex-row gap-6">
+                    <div className="flex-shrink-0 w-full sm:w-32 h-40 sm:h-32 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+                    <div className="flex-1 space-y-4">
+                      <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-3/4"></div>
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/2"></div>
+                      <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded w-1/3"></div>
+                      <div className="flex justify-between items-center">
+                        <div className="h-10 w-24 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+                        <div className="h-6 bg-gray-200 dark:bg-gray-700 rounded w-16"></div>
+                      </div>
+                    </div>
+                  </div>
+                </div>
+              ))}
+            </div>
+            
+            {/* Loading skeleton for cart summary */}
+            <div className="lg:col-span-1">
+              <div className="bg-white dark:bg-gray-800 rounded-2xl p-6 shadow-lg animate-pulse">
+                <div className="h-8 bg-gray-200 dark:bg-gray-700 rounded mb-6"></div>
+                <div className="space-y-4">
+                  <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+                  <div className="space-y-3">
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                    <div className="h-4 bg-gray-200 dark:bg-gray-700 rounded"></div>
+                  </div>
+                  <div className="h-12 bg-gray-200 dark:bg-gray-700 rounded-xl"></div>
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    );
+  }
 
   const updateQuantity = (id, newQuantity) => {
     if (newQuantity === 0) {

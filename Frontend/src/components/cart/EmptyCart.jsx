@@ -1,28 +1,18 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import { ShoppingBag, ArrowRight, Sparkles } from 'lucide-react';
+import { paintings } from '../../data/paintings';
 
 const EmptyCart = () => {
-  const recommendations = [
-    {
-      id: 1,
-      title: "Sunset Dreams",
-      price: 1299,
-      image: "https://images.unsplash.com/photo-1541961017774-22349e4a1262?w=400&h=500&fit=crop"
-    },
-    {
-      id: 2,
-      title: "Urban Symphony",
-      price: 899,
-      image: "https://images.unsplash.com/photo-1547826039-bfc35e0f1ea8?w=400&h=500&fit=crop"
-    },
-    {
-      id: 3,
-      title: "Ocean Whispers",
-      price: 1499,
-      image: "https://images.unsplash.com/photo-1536924940846-227afb31e2a5?w=400&h=500&fit=crop"
-    }
-  ];
+  // Get first 3 paintings as recommendations
+  const recommendations = paintings.slice(0, 3).map(painting => ({
+    id: painting.id,
+    title: painting.title,
+    price: painting.price,
+    image: painting.image,
+    artist: painting.artist,
+    category: painting.category
+  }));
 
   return (
     <div className="min-h-screen bg-gradient-to-br from-gray-50 via-purple-50/30 to-blue-50/30 dark:from-gray-900 dark:via-purple-900/10 dark:to-blue-900/10">
@@ -83,11 +73,19 @@ const EmptyCart = () => {
                   <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-300" />
                 </div>
                 <div className="p-6">
-                  <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors mb-2">
+                  <div className="mb-2">
+                    <span className="inline-block px-2 py-1 bg-purple-100 dark:bg-purple-900/30 text-purple-700 dark:text-purple-300 rounded-full text-xs font-semibold">
+                      {item.category}
+                    </span>
+                  </div>
+                  <h3 className="text-lg font-bold text-gray-900 dark:text-white group-hover:text-purple-600 dark:group-hover:text-purple-400 transition-colors mb-1">
                     {item.title}
                   </h3>
+                  <p className="text-sm text-gray-600 dark:text-gray-400 mb-2">
+                    by {item.artist}
+                  </p>
                   <p className="text-xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent">
-                    ${item.price}
+                    ${item.price.toLocaleString()}
                   </p>
                 </div>
               </Link>
