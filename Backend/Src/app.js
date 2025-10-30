@@ -5,6 +5,7 @@ import authRouter from "./Routes/auth.routes.js";
 import productRouter from "./Routes/product.routes.js";
 import cartRouter from "./Routes/cart.routes.js";
 import orderRouter from "./Routes/order.routes.js";
+import blogRouter from "./Routes/blog.routes.js";
 const app = express();
 
 app.use(cors({
@@ -24,6 +25,7 @@ app.use("/auth", authRouter);
 app.use("/products", productRouter);
 app.use("/cart", cartRouter);
 app.use("/orders", orderRouter);
+app.use("/blogs", blogRouter);
 
 
 export { app };

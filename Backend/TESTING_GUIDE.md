@@ -329,6 +329,62 @@ Content-Type: application/json
 
 ---
 
+### **Phase 7: Blog Writing (Both Buyer & Seller)**
+
+#### Create Blog
+```
+POST http://localhost:8000/blogs
+Authorization: Bearer {token}
+Content-Type: multipart/form-data
+
+title: My Painting Techniques
+shortDescription: Learn the basics of oil painting
+content: Full blog content with all details...
+category: tutorial
+coverImage: [file] blog-cover.jpg
+```
+
+#### Get All Blogs (Public)
+```
+GET http://localhost:8000/blogs?category=tutorial&page=1&limit=10
+```
+
+#### Search Blogs (Public)
+```
+GET http://localhost:8000/blogs?search=painting&page=1&limit=10
+```
+
+#### Get Single Blog (Public)
+```
+GET http://localhost:8000/blogs/:blogId
+```
+
+#### Get Your Blogs (Author)
+```
+GET http://localhost:8000/blogs/author/blogs
+Authorization: Bearer {token}
+```
+
+#### Update Blog (Author)
+```
+PUT http://localhost:8000/blogs/:blogId
+Authorization: Bearer {token}
+Content-Type: multipart/form-data
+
+title: Updated Title
+shortDescription: Updated description
+content: Updated content...
+coverImage: [file] new-cover.jpg (optional)
+```
+
+#### Delete Blog (Author)
+```
+DELETE http://localhost:8000/blogs/:blogId
+Authorization: Bearer {token}
+```
+
+---
+
 ## 🔐 Authentication Flow
 
 1. **Register** → Get `accessToken` + `refreshToken` (in cookies)
@@ -392,7 +448,9 @@ Buyer Creates Order (pending)
 7. ✅ Seller confirms order
 8. ✅ Buyer reviews product
 9. ✅ Test search & filters
-10. ✅ Test logout
+10. ✅ User writes blog
+11. ✅ View all blogs
+12. ✅ Test logout
 
 ---
 
@@ -402,6 +460,13 @@ Buyer Creates Order (pending)
 | ------------------------- | ------- |
 | User Authentication (JWT) | ✅ Ready |
 | Product Management        | ✅ Ready |
+| Shopping Cart             | ✅ Ready |
+| Orders & Purchase         | ✅ Ready |
+| Reviews                   | ✅ Ready |
+| Blog Writing              | ✅ Ready |
+| File Uploads (Cloudinary) | ✅ Ready |
+| Role-based Access         | ✅ Ready |
+| Error Handling            | ✅ Ready |
 | Shopping Cart             | ✅ Ready |
 | Orders & Purchase         | ✅ Ready |
 | Reviews                   | ✅ Ready |
