@@ -22,12 +22,9 @@ const Userschema = new Schema({
         type: String,
         required: [true, 'Password is required']
     },
-    refreshToken: {
-        type: String
-    },
     role: {
         type: String,
-        enum: ['buyer', 'seller', 'admin', 'gallery'],
+        enum: ['buyer', 'seller'],
         default: 'buyer'
     },
     bio: String,

@@ -1,25 +1,34 @@
-import { asyncHandler } from "../Utils/asyncHandler.js";
-import { APIError } from "../Utils/APIError.js";
+
 import jwt from "jsonwebtoken";
 import { User } from "../Models/user.models.js";
 
-const verifyJwt = asyncHandler(async (req, res, next) => {
-    const token = req.cookies?.accessToken || req.header("Authorization")?.replace("Bearer ", "")
-    if (!token) {
-        throw new APIError(401, "Unauthorized request");
+const getTokenFromRequest = (req) => {
+    // prefer cookie, fallback to Authorization header
+    const tokenFromCookie = req.cookies?.accessToken;
+    if (tokenFromCookie) return tokenFromCookie;
+
+    const authHeader = req.headers?.authorization;
+    if (authHeader && authHeader.startsWith("Bearer ")) {
+        return authHeader.split(" ")[1];
     }
-    const decodedtoken = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET)
+    return null;
+};
 
-    // console.log("what we are gettin from cookies is:",token);
-    
-    const user = await User.findById(decodedtoken?._id).select("-password -refreshToken");
-    if (!user) {
-        throw new APIError(401, "invalid access token")
+export const verifyJwt = async (req, res, next) => {
+    try {
+        const token = getTokenFromRequest(req);
+        if (!token) return res.status(401).json({ message: "Unauthorized: No token provided" });
+
+        const payload = jwt.verify(token, process.env.ACCESS_TOKEN_SECRET);
+        if (!payload || !payload._id) return res.status(401).json({ message: "Unauthorized: Invalid token" });
+
+        const user = await User.findById(payload._id).select("-password");
+        if (!user) return res.status(401).json({ message: "Unauthorized: User not found" });
+
+        req.user = user;
+        next();
+    } catch (error) {
+        console.error("JWT verify error:", error.message);
+        return res.status(401).json({ message: "Unauthorized: Token verification failed", error: error.message });
     }
-    // console.log("stuff in user is:",user);
-
-    req.user=user;
-    next();
-})
-
-export { verifyJwt }
+};
