@@ -65,14 +65,14 @@ const About = () => {
           <h1 className="text-4xl sm:text-5xl md:text-6xl font-bold text-white mb-6 animate-appear">
             About MasterPiece
           </h1>
-          <p className="text-xl text-white/90 max-w-3xl mx-auto mb-8 animate-appear opacity-0 delay-100" style={{ animationFillMode: 'forwards' }}>
+          <p className="text-xl text-white/95 max-w-3xl mx-auto mb-8 animate-appear opacity-0 delay-100" style={{ animationFillMode: 'forwards' }}>
             We're passionate about connecting art lovers with extraordinary artworks from talented artists around the world
           </p>
         </div>
       </div>
 
       <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
-        {/* Stats Section */}
+        {/* Stats Section - Fixed colors */}
         <div className="bg-white dark:bg-gray-800 rounded-2xl shadow-lg p-8 mb-16 animate-appear opacity-0 delay-200" style={{ animationFillMode: 'forwards' }}>
           <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
             {stats.map((stat, index) => (
@@ -83,19 +83,19 @@ const About = () => {
                 <div className="text-3xl sm:text-4xl font-bold bg-gradient-to-r from-purple-600 to-blue-600 bg-clip-text text-transparent mb-2">
                   {stat.number}
                 </div>
-                <div className="text-sm text-gray-600 dark:text-gray-400">{stat.label}</div>
+                <div className="text-sm font-medium text-gray-700 dark:text-gray-300">{stat.label}</div>
               </div>
             ))}
           </div>
         </div>
 
-        {/* Our Story */}
+        {/* Our Story - Fixed colors */}
         <div className="grid lg:grid-cols-2 gap-12 mb-16">
           <div className="animate-appear opacity-0 delay-300" style={{ animationFillMode: 'forwards' }}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-6">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-black mb-6">
               Our Story
             </h2>
-            <div className="space-y-4 text-gray-600 dark:text-gray-400 leading-relaxed">
+            <div className="space-y-4 text-gray-800 dark:text-black leading-relaxed text-base">
               <p>
                 MasterPiece was born from a simple belief: everyone deserves access to beautiful, meaningful art. 
                 Founded in 2020 by a team of art enthusiasts and technology experts, we set out to democratize 
@@ -125,13 +125,13 @@ const About = () => {
           </div>
         </div>
 
-        {/* Our Values */}
+        {/* Our Values - Fixed colors */}
         <div className="mb-16">
           <div className="text-center mb-12 animate-appear opacity-0 delay-500" style={{ animationFillMode: 'forwards' }}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-black mb-4">
               Our Values
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-black dark:text-black max-w-2xl mx-auto">
               These core principles guide everything we do and shape our commitment to artists, collectors, and the art community.
             </p>
           </div>
@@ -149,7 +149,7 @@ const About = () => {
                 <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
                   {value.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p className="text-base text-gray-700 dark:text-gray-300 leading-relaxed">
                   {value.description}
                 </p>
               </div>
@@ -157,13 +157,13 @@ const About = () => {
           </div>
         </div>
 
-        {/* Features */}
+        {/* Features - Fixed colors */}
         <div className="mb-16">
           <div className="text-center mb-12 animate-appear opacity-0 delay-700" style={{ animationFillMode: 'forwards' }}>
-            <h2 className="text-3xl sm:text-4xl font-bold text-gray-900 dark:text-white mb-4">
+            <h2 className="text-3xl sm:text-4xl font-bold text-black dark:text-black mb-4">
               Why Choose MasterPiece?
             </h2>
-            <p className="text-gray-600 dark:text-gray-400 max-w-2xl mx-auto">
+            <p className="text-lg text-black-700 dark:text-black max-w-2xl mx-auto ">
               We've built our platform with your needs in mind, offering features that make buying and selling art simple and secure.
             </p>
           </div>
@@ -176,12 +176,12 @@ const About = () => {
                 style={{ animationDelay: `${800 + index * 100}ms`, animationFillMode: 'forwards' }}
               >
                 <div className="inline-flex items-center justify-center w-16 h-16 bg-gradient-to-r from-purple-600 to-blue-600 rounded-2xl mb-6">
-                  <feature.icon className="w-8 h-8 text-white" />
+                  <feature.icon className="w-8 h-8 text-black" />
                 </div>
-                <h3 className="text-xl font-bold text-gray-900 dark:text-white mb-4">
+                <h3 className="text-xl font-bold text-black dark:text-black mb-4">
                   {feature.title}
                 </h3>
-                <p className="text-gray-600 dark:text-gray-400 leading-relaxed">
+                <p className="text-base text-gray-700 dark:text-black leading-relaxed">
                   {feature.description}
                 </p>
               </div>
@@ -189,25 +189,25 @@ const About = () => {
           </div>
         </div>
 
-        {/* CTA Section */}
+        {/* CTA Section - Fixed colors */}
         <div className="bg-gradient-to-r from-purple-600 via-pink-600 to-blue-600 rounded-2xl p-8 md:p-12 text-center text-white animate-appear opacity-0 delay-900" style={{ animationFillMode: 'forwards' }}>
-          <h2 className="text-3xl sm:text-4xl font-bold mb-4">
+          <h2 className="text-3xl sm:text-4xl font-bold mb-4 text-white">
             Ready to Start Your Art Journey?
           </h2>
-          <p className="text-xl text-white/90 mb-8 max-w-2xl mx-auto">
+          <p className="text-xl text-white/95 mb-8 max-w-2xl mx-auto">
             Join thousands of art lovers who have discovered their perfect pieces on MasterPiece
           </p>
           <div className="flex flex-col sm:flex-row gap-4 justify-center">
             <Link 
               to="/discover"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-purple-600 rounded-xl font-semibold hover:bg-gray-100 transform hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white text-purple-600 rounded-xl font-semibold hover:bg-gray-50 transform hover:scale-105 transition-all duration-300 shadow-lg"
             >
               Explore Artworks
               <ArrowRight className="w-5 h-5" />
             </Link>
             <Link 
               to="/artists"
-              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/20 backdrop-blur-sm text-white rounded-xl font-semibold hover:bg-white/30 transform hover:scale-105 transition-all duration-300"
+              className="inline-flex items-center justify-center gap-2 px-8 py-4 bg-white/20 backdrop-blur-sm text-black border-2 border-white/30 rounded-xl font-semibold hover:bg-white/30 hover:border-white/50 transform hover:scale-105 transition-all duration-300"
             >
               Meet Our Artists
               <Users className="w-5 h-5" />

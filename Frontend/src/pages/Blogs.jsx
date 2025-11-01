@@ -2,7 +2,6 @@ import React from 'react';
 import { Search, Calendar, Clock, ArrowRight, TrendingUp } from 'lucide-react';
 import BlogCard from '../components/blog/BlogCard';
 import FeaturedBlog from '../components/blog/FeaturedBlog';
-import Newsletter from '../components/blog/Newsletter';
 import { blogs, blogCategories } from '../data/blogs';
 
 const Blogs = () => {
@@ -88,7 +87,7 @@ const Blogs = () => {
         </div>
 
         {/* Newsletter */}
-        <Newsletter />
+
       </div>
     </div>
   );
